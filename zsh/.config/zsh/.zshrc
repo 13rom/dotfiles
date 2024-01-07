@@ -6,22 +6,25 @@
 # Source files
 plug "${ZDOTDIR}/exports.zsh"
 plug "${ZDOTDIR}/aliases.zsh"
+plug "${ZDOTDIR}/supercharge.zsh"
 
 # Load plugins
-plug "zap-zsh/supercharge"
 plug "zap-zsh/fzf"
-# plug "zap-zsh/vim"
-# plug "zap-zsh/exa"
 plug "zsh-users/zsh-syntax-highlighting"
-# plug "zsh-users/zsh-autosuggestions"
 plug "wintermi/zsh-lsd"
-# plug "fdellwing/zsh-bat"
 plug "13rom/zsh-bat"
 plug "agkozak/zsh-z"
-# plug "Freed-Wu/fzf-tab-source"
 plug "MichaelAquilina/zsh-you-should-use"
 
+# plug "zap-zsh/supercharge"
+# plug "zap-zsh/vim"
+# plug "zap-zsh/exa"
+# plug "zsh-users/zsh-autosuggestions"
+# plug "fdellwing/zsh-bat"
+# plug "Freed-Wu/fzf-tab-source"
+
 # Load prompt
+plug "${ZDOTDIR}/plugins/zsh-simple-prompt"
 # plug "zap-zsh/atmachine-prompt"
 # plug "zap-zsh/zap-prompt"
 # plug "spaceship-prompt/spaceship-prompt"
@@ -29,7 +32,6 @@ plug "MichaelAquilina/zsh-you-should-use"
 # plug "zettlrobert/simple-prompt"
 # plug "mafredri/zsh-async"
 # plug "sindresorhus/pure"
-plug "${ZDOTDIR}/plugins/zsh-simple-prompt"
 
 # Load and initialize completion system
 # autoload -Uz compinit
@@ -65,4 +67,4 @@ plug "${ZDOTDIR}/plugins/zsh-simple-prompt"
 # zstyle ':prompt:pure:prompt:error' color red
 
 # turn on git stash status
-zstyle :prompt:pure:git:stash show yes
+# zstyle :prompt:pure:git:stash show yes

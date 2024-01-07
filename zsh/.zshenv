@@ -12,6 +12,8 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
 # Set ZDOTDIR if you want to re-home Zsh.
 export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
+export ZDATADIR="${XDG_DATA_HOME}/zsh"
+export ZCACHEDIR="${XDG_CACHE_HOME}/zsh"
 
 # You can use .zprofile to set environment vars for non-login, non-interactive shells.
 if [[ ("$SHLVL" -eq 1 && ! -o LOGIN) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
