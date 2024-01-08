@@ -1,5 +1,9 @@
 autoload -Uz plug
 
+# Setup environment according to XDG Base Directory Specification
+[ -n "$XDG_DATA_HOME" ] && export ZDATADIR="${XDG_DATA_HOME}/zsh"
+[ -n "$XDG_CACHE_HOME" ] && export ZCACHEDIR="${XDG_CACHE_HOME}/zsh"
+
 # completions
 export ZSH_COMPDUMP="${ZCACHEDIR:-$HOME}/.zcompdump"
 autoload -Uz compinit
