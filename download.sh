@@ -1,6 +1,8 @@
 #!/bin/sh
 
 # ~/.dotfiles/download.sh: Download dotfiles from github and run installer script
+# Original version:
+# https://github.com/felipecrs/dotfiles/blob/master/scripts/install_dotfiles.sh
 
 # -e: exit on error
 # -u: exit on unset variables
