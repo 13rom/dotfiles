@@ -53,8 +53,8 @@ zstyle ':vcs_info:git:*' formats "%F{yellow} %{$reset_color%} %F{3}%b %F{mage
 # time="%F{4}%*%{$reset_color%}"
 # machine="%F{4}%m%{$reset_color%}"
 # at="%F{15}at%{$reset_color%}"
-at="%F{yellow}󰋜%{$reset_color%}"     # home
-# at="%F{yellow}%{$reset_color%}" # circle arrow
+# at="%F{yellow}󰋜%{$reset_color%}"     # home icon
+at="%F{yellow}%{$reset_color%}" # circle arrow
 # relativeHome="%F{4}%~%{$reset_color%}"
 # relativeHome="%F{4}%(4~|.../%3~|%~)%{$reset_color%}"
 # relativeHome="%F{4}%(5~|%-1~/.../%3~|%4~)%{$reset_color%}" # show first and last three directories: /usr/.../share/zsh/site-functions
