@@ -11,15 +11,16 @@ plug "${ZDOTDIR}/supercharge.zsh"
 # Load plugins
 plug "zap-zsh/fzf"
 plug "zsh-users/zsh-syntax-highlighting"
+plug "zsh-users/zsh-autosuggestions"
 plug "wintermi/zsh-lsd"
 plug "13rom/zsh-bat"
 plug "agkozak/zsh-z"
 plug "MichaelAquilina/zsh-you-should-use"
+plug "zap-zsh/completions"
 
 # plug "zap-zsh/supercharge"
 # plug "zap-zsh/vim"
 # plug "zap-zsh/exa"
-# plug "zsh-users/zsh-autosuggestions"
 # plug "fdellwing/zsh-bat"
 # plug "Freed-Wu/fzf-tab-source"
 
@@ -36,6 +37,8 @@ plug "${ZDOTDIR}/plugins/zsh-simple-prompt"
 # Load and initialize completion system
 # autoload -Uz compinit
 # compinit
+autoload bashcompinit && bashcompinit
+complete -C '/usr/local/bin/aws_completer' aws
 
 # if
 #   command -v batcat &>/dev/null
