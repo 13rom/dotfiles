@@ -1,73 +1,97 @@
-#!/bin/bash
+# ZSHRC
+# --------------------------
+# Prerequisites:
+# - sudo apt install git zsh stow direnv
+# - sudo apt install build-essential procps curl file git
+# - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# - brew install fzf zoxide eza bat
+# --------------------------
 
-# Run Zap
-[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
+# Set XDG Base Directory Specification
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
-# Source files
-plug "${ZDOTDIR}/exports.zsh"
-plug "${ZDOTDIR}/aliases.zsh"
-plug "${ZDOTDIR}/supercharge.zsh"
+# Linuxbrew setup
+if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
+  # If you're using homebrew on linux, you'll want this enabled
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
-# Load plugins
-plug "zap-zsh/fzf"
-plug "zsh-users/zsh-syntax-highlighting"
-plug "zsh-users/zsh-autosuggestions"
-plug "wintermi/zsh-lsd"
-plug "13rom/zsh-bat"
-plug "agkozak/zsh-z"
-plug "MichaelAquilina/zsh-you-should-use"
-plug "zap-zsh/completions"
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# plug "zap-zsh/supercharge"
-# plug "zap-zsh/vim"
-# plug "zap-zsh/exa"
-# plug "fdellwing/zsh-bat"
-# plug "Freed-Wu/fzf-tab-source"
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-# Load prompt
-plug "${ZDOTDIR}/plugins/zsh-simple-prompt"
-# plug "zap-zsh/atmachine-prompt"
-# plug "zap-zsh/zap-prompt"
-# plug "spaceship-prompt/spaceship-prompt"
-# plug "MAHcodes/distro-prompt"
-# plug "zettlrobert/simple-prompt"
-# plug "mafredri/zsh-async"
-# plug "sindresorhus/pure"
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-# Load and initialize completion system
-# autoload -Uz compinit
-# compinit
-autoload bashcompinit && bashcompinit
-complete -C '/usr/local/bin/aws_completer' aws
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+# Load starship theme
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
 
-# if
-#   command -v batcat &>/dev/null
-# then
-#   alias cat="batcat -pp --theme \"Visual Studio Dark+\""
-#   alias catt="batcat --theme \"Visual Studio Dark+\""
-# fi
+# Add in snippets
+zinit snippet OMZP::sudo
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
+# zinit snippet OMZL::git.zsh
+# zinit snippet OMZP::git
 
-# if
-#   command -v lsd &>/dev/null
-# then
-#   alias ls='lsd --group-dirs=first'
-# fi
+# Load completions
+autoload -Uz compinit && compinit
 
-# Prettify ls and cat (lsd and batcat must be installed)
-# command -v lsd >/dev/null && alias ls='lsd --group-dirs first'
-#command -v lsd > /dev/null && alias tree='lsd --tree'
-# command -v batcat >/dev/null && alias cat='batcat -pp --theme="Visual Studio Dark+"'
-# command -v batcat >/dev/null && alias less='batcat -p --theme="Visual Studio Dark+"'
+zinit cdreplay -q
 
-# optionally define some options
-# PURE_CMD_MAX_EXEC_TIME=10
+# Keybindings
+bindkey -e
 
-# # change the path color
-# zstyle :prompt:pure:path color yellow
+# History
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups
 
-# # change the color for both `prompt:success` and `prompt:error`
-# zstyle ':prompt:pure:prompt:success' color white
-# zstyle ':prompt:pure:prompt:error' color red
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+# zstyle ':fzf-tab:complete:*' fzf-preview 'eza $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# turn on git stash status
-# zstyle :prompt:pure:git:stash show yes
+# Exports
+export EDITOR="vim"
+export EZA_ICON_SPACING=2
+
+# Aliases
+alias ls="eza -F --long --group-directories-first --icons=always --git --git-ignore --color-scale all --smart-group"
+alias zreload="source ~/.config/zsh/.zshrc"
+alias zshrc="code ~/.config/zsh/.zshrc"
+
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(direnv hook zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+# Starship prompt
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
+
+
