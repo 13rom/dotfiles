@@ -29,3 +29,6 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 # systemd
 alias mach_list_systemctl="systemctl list-unit-files --state=enabled"
+
+# Run an http server: serve 8888
+alias serve="python3 -m http.server" 
