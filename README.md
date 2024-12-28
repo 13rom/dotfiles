@@ -5,22 +5,20 @@
 Install the packages:
 
 ```shell
-sudo apt update && sudo apt install stow zsh
+sudo apt update && sudo apt install git zsh stow direnv
+```
+
+Install brew:
+
+```shell
+sudo apt install build-essential procps curl file git
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Install auxiliary programs:
 
 ```shell
-sudo apt install bat
-wget https://github.com/lsd-rs/lsd/releases/download/v1.1.2/lsd-musl_1.1.2_amd64.deb
-sudo apt install ./lsd-musl_1.1.2_amd64.deb
-rm ./lsd-musl_1.1.2_amd64.deb
-```
-
-Install zap:
-
-```shell
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+brew install fzf zoxide eza bat
 ```
 
 ## Deploy
