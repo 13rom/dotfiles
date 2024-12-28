@@ -84,7 +84,7 @@ export EZA_ICON_SPACING=2
 [[ -f $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
 alias zreload="source $HOME/.zshrc"
 alias zshrc="code $HOME/.zshrc"
-alias ls="eza -F --long --group-directories-first --icons=always --git --git-ignore --color-scale all --smart-group"
+alias ls="eza -F --long --group-directories-first --icons=always --git --git-ignore --color --color-scale all --smart-group"
 alias cd..="cd .."
 
 # Shell integrations
