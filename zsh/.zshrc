@@ -1,4 +1,4 @@
-# ZSHRC
+# ~/.zshrc
 # --------------------------
 # Prerequisites:
 # - sudo apt install git zsh stow direnv
@@ -81,6 +81,7 @@ export EDITOR="vim"
 export EZA_ICON_SPACING=2
 
 # Aliases
+[[ -f $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
 alias ls="eza -F --long --group-directories-first --icons=always --git --git-ignore --color-scale all --smart-group"
 alias zreload="source ~/.config/zsh/.zshrc"
 alias zshrc="code ~/.config/zsh/.zshrc"
