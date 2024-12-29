@@ -84,16 +84,18 @@ export EZA_ICON_SPACING=2
 [[ -f $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
 alias zreload="source $HOME/.zshrc"
 alias zshrc="code $HOME/.zshrc"
-alias ls="eza -F --long --group-directories-first --icons=always --git --git-ignore --color --color-scale all --smart-group"
+alias ls="eza -F --long --group --group-directories-first --icons=always --git --color --color-scale all --smart-group"
 alias cd..="cd .."
 
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(direnv hook zsh)"
+
+# Custom completions
+source <(kubectl completion zsh)
 
 # Starship prompt
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
-
-
