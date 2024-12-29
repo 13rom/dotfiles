@@ -32,3 +32,23 @@ alias mach_list_systemctl="systemctl list-unit-files --state=enabled"
 
 # Run an http server: serve 8888
 alias serve="python3 -m http.server" 
+
+# search and use bat as a previewer
+if [[ -x "$(command -v fzf)" ]] && [[ -x "$(command -v bat)" ]]; then
+  alias fp="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  
+  supersearch() {
+    if [ $# -eq 0 ]; then
+      fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'
+    else
+      if [ -d $1 ]; then
+        grep -R "$(find $1/* -type f -exec cat {} \; | fzf)" $1/
+      else
+        cat $1 | fzf
+      fi
+    fi
+  }
+
+  alias sps=supersearch
+fi
