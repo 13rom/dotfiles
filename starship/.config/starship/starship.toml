@@ -13,6 +13,12 @@ $line_break\
 $python\
 $character"""
 
+[username]
+disabled = true
+
+[hostname]
+disabled = true
+
 [directory]
 style = "blue"
 
@@ -20,8 +26,10 @@ style = "blue"
 disabled = true
 
 [character]
-success_symbol = "[❱](bold purple)"
-error_symbol = "[❱](red)"
+# success_symbol = "[❱](bold purple)"
+# error_symbol = "[❱](red)"
+success_symbol = "[❯](bold purple)"
+error_symbol = "[❯](red)"
 vimcmd_symbol = "[❰](green)"
 
 [fill]
