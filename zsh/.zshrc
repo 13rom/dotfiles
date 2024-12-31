@@ -13,7 +13,7 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
 # Linuxbrew setup
-if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] then
+if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
   # If you're using homebrew on linux, you'll want this enabled
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
