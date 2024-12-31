@@ -91,7 +91,6 @@ alias cd..="cd .."
 eval "$(fzf --zsh)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(direnv hook zsh)"
 
 # Custom completions
 source <(kubectl completion zsh)
