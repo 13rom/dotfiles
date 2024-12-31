@@ -45,6 +45,7 @@ autoload -Uz compinit && compinit
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light MichaelAquilina/zsh-you-should-use
 zinit light Aloxaf/fzf-tab
 
 # Load starship theme
